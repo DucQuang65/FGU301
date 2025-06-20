@@ -4,8 +4,7 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Enemy
-  - EnemyBullet
+  - UI
   layers:
   - Default
   - TransparentFX
@@ -27,6 +26,9 @@ TagManager:
   - 
   - 
   - 
+  - Layer 1
+  - Layer 2
+  - Layer 3
   - 
   - 
   - 
@@ -35,25 +37,19 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Map
   m_SortingLayers:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 3988228771
+  - name: UI
+    uniqueID: 2425651459
     locked: 0
-  - name: Gun
-    uniqueID: 910071469
+  - name: BackGround
+    uniqueID: 4250941897
     locked: 0
-  - name: Enemy
-    uniqueID: 2285564723
-    locked: 0
-  - name: HpBar
-    uniqueID: 2872687353
+  - name: ForeG
+    uniqueID: 4189426099
     locked: 0
   m_RenderingLayers:
   - Default
