@@ -25,4 +25,5 @@ Thumbs.db
 
 # Visual Studio Code
 .vscode/
-.vsconfig
+.vsconfig".vs/" 
+".vs/" 

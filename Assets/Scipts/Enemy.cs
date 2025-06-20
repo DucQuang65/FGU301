@@ -5,8 +5,8 @@ public abstract class Enemy : MonoBehaviour
 {   // Public variables
     [SerializeField] protected float moveSpeed = 2f;
     protected Player player;
-    [SerializeField] protected float maxHp = 50f;
     protected float currentHp;
+    [SerializeField] protected float maxHp = 50f;
     [SerializeField] private Image hpBar;
     [SerializeField] protected float enterDamage = 10f;
     [SerializeField] protected float stayDamage = 1f;

@@ -8,7 +8,7 @@ public class BossEnemy : Enemy
     [SerializeField] private float speedShootBullet = 20f;
     [SerializeField] private float speedCircularShot = 10f;
     [SerializeField] private float hpValue = 20f;
-    [SerializeField] private GameObject minionPrefab;
+    [SerializeField] private GameObject Mions;
     [SerializeField] private float skillCooldown = 5f;
     [SerializeField] private GameObject usbPrefab;
     [SerializeField] private float enterDamage = 10f; // Damage on initial collision
@@ -19,11 +19,11 @@ public class BossEnemy : Enemy
     private Transform tower; // Reference to the Tower
     private bool isPlayerInRange; // Track if Player is in trigger
 
-    protected override void Awake()
+    private void Awake()
     {
         base.Awake();
-        player = FindObjectOfType<Player>();
-        tower = FindObjectOfType<Tower>()?.transform; // Find Tower in scene
+        player = FindFirstObjectByType<Player>();
+        tower = FindFirstObjectByType <MainTower>()?.transform; // Find Tower in scene
         if (player == null) Debug.LogError("Player not found!");
         if (tower == null) Debug.LogError("Tower not found!");
     }
@@ -113,7 +113,7 @@ public class BossEnemy : Enemy
         if (player != null)
         {
             Vector3 directionToPlayer = player.transform.position - firePoint.position;
-            GameObject bullet = Instantiate(bulletPrefabs, firePoint.position, Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
             EnemyBullet enemyBullet = bullet.AddComponent<EnemyBullet>();
             enemyBullet.SetMovementDirection(directionToPlayer * speedShootBullet);
         }
@@ -127,7 +127,7 @@ public class BossEnemy : Enemy
         {
             float angle = i * angleStep * Mathf.Deg2Rad; // Convert angle to radians
             Vector3 bulletDirection = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
-            GameObject bullet = Instantiate(bulletPrefabs, firePoint.position, Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
             EnemyBullet enemyBullet = bullet.AddComponent<EnemyBullet>();
             enemyBullet.SetMovementDirection(bulletDirection * speedCircularShot);
         }
