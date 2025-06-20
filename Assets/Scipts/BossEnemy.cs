@@ -3,47 +3,105 @@ using UnityEngine;
 
 public class BossEnemy : Enemy
 {
-    [SerializeField] private GameObject bulletPrefabs;
+    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float speedShootBullet = 20f;
     [SerializeField] private float speedCircularShot = 10f;
-    [SerializeField] private float hpValue = 100f;
-    [SerializeField] private GameObject Mions;
+    [SerializeField] private float hpValue = 20f;
+    [SerializeField] private GameObject minionPrefab;
+    [SerializeField] private float skillCooldown = 5f;
+    [SerializeField] private GameObject usbPrefab;
+    [SerializeField] private float enterDamage = 10f; // Damage on initial collision
+    [SerializeField] private float stayDamage = 5f;  // Damage while staying in collision
+    [SerializeField] private float moveSpeed = 3f;    // Speed to move toward Tower
+    private float nextSkillTime = 0f;
+    private Player player;
+    private Transform tower; // Reference to the Tower
+    private bool isPlayerInRange; // Track if Player is in trigger
+
+    protected override void Awake()
+    {
+        base.Awake();
+        player = FindObjectOfType<Player>();
+        tower = FindObjectOfType<Tower>()?.transform; // Find Tower in scene
+        if (player == null) Debug.LogError("Player not found!");
+        if (tower == null) Debug.LogError("Tower not found!");
+    }
+
     protected override void Update()
     {
         base.Update();
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Time.time >= nextSkillTime)
         {
-            SpawnMions();
+            UseSkill();
         }
+        // Move toward Tower if Player is not in range
+        if (!isPlayerInRange && tower != null)
+        {
+            Vector2 direction = (tower.position - transform.position).normalized;
+            transform.position += (Vector3)(direction * moveSpeed * Time.deltaTime);
+            Debug.Log("Moving toward Tower!");
+        }
+    }
+    protected override void Die()
+    {
+        Istantiate(usbPrefab, transform.position, Quaternion.identity); // Spawn USB on death
+        base.Die(); // Call the base class Die method to handle the death logic
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        while (collision.CompareTag("Tower"))
+        // Prioritize Player
+        if (collision.CompareTag("Player"))
         {
-            if (collision.CompareTag("Player"))
+            isPlayerInRange = true; // Stop moving toward Tower
+            Player player = collision.GetComponent<Player>();
+            if (player != null)
             {
-                Player player = collision.GetComponent<player>();
-                if (player != null) player.TakeDamage(enterDamage);
+                player.TakeDamage(enterDamage);
+                Debug.Log($"Dealt {enterDamage} damage to Player on enter!");
             }
+        }
+        // Attack Tower if no Player
+        else if (collision.CompareTag("Tower"))
+        {
             Tower tower = collision.GetComponent<Tower>();
-            if (tower != null) tower.TakeDamage(enterDamage);
+            if (tower != null)
+            {
+                tower.TakeDamage(enterDamage);
+                Debug.Log($"Dealt {enterDamage} damage to Tower on enter!");
+            }
         }
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
+        // Continue attacking Player while in range
         if (collision.CompareTag("Player"))
         {
             Player player = collision.GetComponent<Player>();
             if (player != null)
             {
-                player.TakeDamage(stayDamage);
+                player.TakeDamage(stayDamage * Time.deltaTime); // Scale damage by time
+                Debug.Log($"Dealing {stayDamage} damage/sec to Player on stay!");
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Resume targeting Tower when Player leaves range
+        if (collision.CompareTag("Player"))
+        {
+            isPlayerInRange = false;
+            Debug.Log("Player left range, resuming Tower target!");
         }
     }
     private void Teleport()
     {
-
+        if(player != null)
+        {
+            transform.position = player.transform.position;
+        }
     }
     private void SpawnMions()
     {
@@ -80,5 +138,37 @@ public class BossEnemy : Enemy
         currentHp = Mathf.Min(currentHp + hpAmount, maxHp); // Heal the boss by 20, but not exceeding max HP
         UpdateHpBar();
         Debug.Log("Healing boss!");
+    }
+    private void RandomSkill()
+    {
+        int ranedomSkill = Random.Range(0, 4);
+        switch (ranedomSkill)
+        {
+            case 0:
+                Teleport();
+                Debug.Log("Teleporting!");
+                break;
+            case 1:
+                ShootBullet();
+                Debug.Log("Shooting bullet!");
+                break;
+            case 2:
+                CircularShot();
+                Debug.Log("Performing circular shot!");
+                break;
+            case 3:
+                Healing(hpValue);
+                Debug.Log("Healing boss!");
+                break;
+            case 4:
+                SpawnMions();
+                Debug.Log("Spawning minions!");
+                break;
+        }
+    }
+    private void UseSkill()
+    {
+        nextSkillTime = Time.time + skillCooldown; // Set the next skill time
+        RandomSkill(); // Call the random skill method
     }
 }
