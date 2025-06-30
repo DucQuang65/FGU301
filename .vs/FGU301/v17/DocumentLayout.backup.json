@@ -1,10 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\duc\\HK5\\FGU301\\FGU301\\",
+  "WorkspaceRootPath": "I:\\Hoc\\Unity\\FGU301\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0D3EACDB-CE31-5E2A-4E61-3DB9FD864FD7}|Assembly-CSharp.csproj|d:\\duc\\hk5\\fgu301\\fgu301\\assets\\scipts\\bossenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0D3EACDB-CE31-5E2A-4E61-3DB9FD864FD7}|Assembly-CSharp.csproj|i:\\hoc\\unity\\fgu301\\assets\\scipts\\basicenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D3EACDB-CE31-5E2A-4E61-3DB9FD864FD7}|Assembly-CSharp.csproj|solutionrelative:assets\\scipts\\basicenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D3EACDB-CE31-5E2A-4E61-3DB9FD864FD7}|Assembly-CSharp.csproj|i:\\hoc\\unity\\fgu301\\assets\\scipts\\bossenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0D3EACDB-CE31-5E2A-4E61-3DB9FD864FD7}|Assembly-CSharp.csproj|solutionrelative:assets\\scipts\\bossenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D3EACDB-CE31-5E2A-4E61-3DB9FD864FD7}|Assembly-CSharp.csproj|I:\\Hoc\\Unity\\FGU301\\assets\\scipts\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D3EACDB-CE31-5E2A-4E61-3DB9FD864FD7}|Assembly-CSharp.csproj|solutionrelative:assets\\scipts\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D3EACDB-CE31-5E2A-4E61-3DB9FD864FD7}|Assembly-CSharp.csproj|I:\\Hoc\\Unity\\FGU301\\assets\\scipts\\maintower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D3EACDB-CE31-5E2A-4E61-3DB9FD864FD7}|Assembly-CSharp.csproj|solutionrelative:assets\\scipts\\maintower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D3EACDB-CE31-5E2A-4E61-3DB9FD864FD7}|Assembly-CSharp.csproj|I:\\Hoc\\Unity\\FGU301\\assets\\scipts\\mions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D3EACDB-CE31-5E2A-4E61-3DB9FD864FD7}|Assembly-CSharp.csproj|solutionrelative:assets\\scipts\\mions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,15 +39,64 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "BasicEnemy.cs",
+              "DocumentMoniker": "I:\\Hoc\\Unity\\FGU301\\Assets\\Scipts\\BasicEnemy.cs",
+              "RelativeDocumentMoniker": "Assets\\Scipts\\BasicEnemy.cs",
+              "ToolTip": "I:\\Hoc\\Unity\\FGU301\\Assets\\Scipts\\BasicEnemy.cs",
+              "RelativeToolTip": "Assets\\Scipts\\BasicEnemy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T13:25:41.088Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainTower.cs",
+              "DocumentMoniker": "I:\\Hoc\\Unity\\FGU301\\Assets\\Scipts\\MainTower.cs",
+              "RelativeDocumentMoniker": "Assets\\Scipts\\MainTower.cs",
+              "ToolTip": "I:\\Hoc\\Unity\\FGU301\\Assets\\Scipts\\MainTower.cs",
+              "RelativeToolTip": "Assets\\Scipts\\MainTower.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T07:32:15.271Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Enemy.cs",
+              "DocumentMoniker": "I:\\Hoc\\Unity\\FGU301\\Assets\\Scipts\\Enemy.cs",
+              "RelativeDocumentMoniker": "Assets\\Scipts\\Enemy.cs",
+              "ToolTip": "I:\\Hoc\\Unity\\FGU301\\Assets\\Scipts\\Enemy.cs",
+              "RelativeToolTip": "Assets\\Scipts\\Enemy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T07:25:51.328Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "BossEnemy.cs",
-              "DocumentMoniker": "D:\\duc\\HK5\\FGU301\\FGU301\\Assets\\Scipts\\BossEnemy.cs",
+              "DocumentMoniker": "I:\\Hoc\\Unity\\FGU301\\Assets\\Scipts\\BossEnemy.cs",
               "RelativeDocumentMoniker": "Assets\\Scipts\\BossEnemy.cs",
-              "ToolTip": "D:\\duc\\HK5\\FGU301\\FGU301\\Assets\\Scipts\\BossEnemy.cs",
+              "ToolTip": "I:\\Hoc\\Unity\\FGU301\\Assets\\Scipts\\BossEnemy.cs",
               "RelativeToolTip": "Assets\\Scipts\\BossEnemy.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAwwBUAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-20T06:59:39.65Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Mions.cs",
+              "DocumentMoniker": "I:\\Hoc\\Unity\\FGU301\\Assets\\Scipts\\Mions.cs",
+              "RelativeDocumentMoniker": "Assets\\Scipts\\Mions.cs",
+              "ToolTip": "I:\\Hoc\\Unity\\FGU301\\Assets\\Scipts\\Mions.cs",
+              "RelativeToolTip": "Assets\\Scipts\\Mions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T07:28:11.486Z"
             }
           ]
         }

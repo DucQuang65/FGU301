@@ -62,6 +62,20 @@ public class Player : MonoBehaviour
             Die();
         }
     }
+    public void Heal(float healAmount)
+    {
+        if (currentHp < maxHp) // Check if player can be healed
+        {
+            currentHp += healAmount;
+            currentHp = Mathf.Min(currentHp, maxHp); // Ensure current HP does not exceed max HP
+            UpdateHpBar();
+            Debug.Log($"Player healed for {healAmount} points!");
+        }
+        else
+        {
+            Debug.Log("Player is already at full health!"); // Log if player is already at full health
+        }
+    }
     private void Die()
     {
         // Handle player death

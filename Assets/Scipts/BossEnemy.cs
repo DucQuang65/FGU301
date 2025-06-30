@@ -19,7 +19,7 @@ public class BossEnemy : Enemy
     private Transform tower; // Reference to the Tower
     private bool isPlayerInRange; // Track if Player is in trigger
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         player = FindFirstObjectByType<Player>();
@@ -45,7 +45,7 @@ public class BossEnemy : Enemy
     }
     protected override void Die()
     {
-        Istantiate(usbPrefab, transform.position, Quaternion.identity); // Spawn USB on death
+        Instantiate(usbPrefab, transform.position, Quaternion.identity); // Spawn USB on death
         base.Die(); // Call the base class Die method to handle the death logic
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,7 +64,7 @@ public class BossEnemy : Enemy
         // Attack Tower if no Player
         else if (collision.CompareTag("Tower"))
         {
-            Tower tower = collision.GetComponent<Tower>();
+            MainTower tower = collision.GetComponent<MainTower>();
             if (tower != null)
             {
                 tower.TakeDamage(enterDamage);
