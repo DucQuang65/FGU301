@@ -14,11 +14,11 @@ public class UpgradeUI : MonoBehaviour
     [SerializeField] private Button levelUpButton;
     private MainTower tower;
     private float testGold = 1000f;
-    private AudioSource audioSource; // Thêm AudioSource cho UI
+    private AudioSource audioSource; 
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>(); // Lấy AudioSource
+        audioSource = GetComponent<AudioSource>(); 
         if (audioSource == null)
         {
             Debug.LogError("AudioSource không được gắn trên UpgradeCanvas!");
@@ -28,6 +28,8 @@ public class UpgradeUI : MonoBehaviour
         {
             tower = mainTower.GetComponent<MainTower>();
             tower.onTowerClicked.AddListener(OnTowerClicked);
+            tower.onLevelUp.AddListener(UpdateUI);
+            tower.onHealthChanged.AddListener(UpdateUI);
             Debug.Log("Tower clicked listener added");
         }
         else

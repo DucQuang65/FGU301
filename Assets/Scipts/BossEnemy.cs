@@ -11,21 +11,17 @@ public class BossEnemy : Enemy
     [SerializeField] private GameObject Mions;
     [SerializeField] private float skillCooldown = 5f;
     [SerializeField] private GameObject usbPrefab;
-    [SerializeField] private float enterDamage = 10f; // Damage on initial collision
-    [SerializeField] private float stayDamage = 5f;  // Damage while staying in collision
-    [SerializeField] private float moveSpeed = 3f;    // Speed to move toward Tower
+    
     private float nextSkillTime = 0f;
-    private Player player;
-    private Transform tower; // Reference to the Tower
+ 
     private bool isPlayerInRange; // Track if Player is in trigger
 
     protected override void Awake()
     {
         base.Awake();
-        player = FindFirstObjectByType<Player>();
-        tower = FindFirstObjectByType <MainTower>()?.transform; // Find Tower in scene
-        if (player == null) Debug.LogError("Player not found!");
-        if (tower == null) Debug.LogError("Tower not found!");
+        enterDamage = 20f;
+        stayDamage = 10f;
+        moveSpeed = 2.5f;
     }
 
     protected override void Update()
@@ -38,7 +34,7 @@ public class BossEnemy : Enemy
         // Move toward Tower if Player is not in range
         if (!isPlayerInRange && tower != null)
         {
-            Vector2 direction = (tower.position - transform.position).normalized;
+            Vector2 direction = (tower.transform.position - transform.position).normalized;
             transform.position += (Vector3)(direction * moveSpeed * Time.deltaTime);
             Debug.Log("Moving toward Tower!");
         }
@@ -98,7 +94,7 @@ public class BossEnemy : Enemy
     }
     private void Teleport()
     {
-        if(player != null)
+        if (player != null)
         {
             transform.position = player.transform.position;
         }

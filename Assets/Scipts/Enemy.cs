@@ -12,6 +12,10 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private float playerChaseRange = 5f;
     [SerializeField] protected float enterDamage = 10f;
     [SerializeField] protected float stayDamage = 1f;
+
+    public delegate void EnemyDestroyedHandler(Enemy enemy);
+    public event EnemyDestroyedHandler OnEnemyDestroyed;
+
     protected enum EnemyState
     {
         ChasingTower,
@@ -111,7 +115,9 @@ public abstract class Enemy : MonoBehaviour
         if (target.position.x < transform.position.x)
         {
             scale.x = -Mathf.Abs(scale.x); // flip to left
-        }else{
+        }
+        else
+        {
             scale.x = Mathf.Abs(scale.x);  // flip to right
         }
         transform.localScale = scale;
@@ -131,7 +137,7 @@ public abstract class Enemy : MonoBehaviour
     }
     protected virtual void Die()
     {
-        // Handle enemy death
+        OnEnemyDestroyed?.Invoke(this);
         Destroy(gameObject); // Destroy the enemy game object
     }
     protected void UpdateHpBar()

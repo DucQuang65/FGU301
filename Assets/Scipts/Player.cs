@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     }
     void MoverPlayer()
     {   // Get input from keyboard or controller
-        Vector2 playerInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); 
+        Vector2 playerInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         rb.linearVelocity = playerInput.normalized * moveSpeed; // Set the velocity based on input and speed
 
         // Flip base on input direction
@@ -42,25 +42,27 @@ public class Player : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
-        if (playerInput != Vector2.zero){
+        if (playerInput != Vector2.zero)
+        {
             animator.SetBool("IsRun", true); // Set the animation state to moving
         }
-        else { 
+        else
+        {
             animator.SetBool("IsRun", false); // Set the animation state to idle
         }
     }
 
     public void TakeDamage(float damage)
     {
-        // Handle player taking damage
-        Debug.Log($"Player took {damage}  damage!");
-        currentHp -= damage;
-        currentHp = Mathf.Max(currentHp, 0); // Ensure current HP does not go below 0
-        UpdateHpBar();
-        if (currentHp <= 0)
-        {
-            Die();
-        }
+        //// Handle player taking damage
+        //Debug.Log($"Player took {damage}  damage!");
+        //currentHp -= damage;
+        //currentHp = Mathf.Max(currentHp, 0); // Ensure current HP does not go below 0
+        //UpdateHpBar();
+        //if (currentHp <= 0)
+        //{
+        //    Die();
+        //}
     }
     public void Heal(float healAmount)
     {
@@ -76,12 +78,12 @@ public class Player : MonoBehaviour
             Debug.Log("Player is already at full health!"); // Log if player is already at full health
         }
     }
-    private void Die()
-    {
-        // Handle player death
-        Debug.Log("Player has died!");
-        Destroy(gameObject); // Destroy the player game object
-    }
+    //private void Die()
+    //{
+    //    // Handle player death
+    //    Debug.Log("Player has died!");
+    //    Destroy(gameObject); // Destroy the player game object
+    //}
     protected void UpdateHpBar()
     {
         if (hpBar != null)

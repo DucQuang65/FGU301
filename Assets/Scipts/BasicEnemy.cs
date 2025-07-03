@@ -1,27 +1,45 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BasicEnemy : Enemy// Inherits from the Enemy class
 {
-    private void OnTriggerEnter2D(UnityEngine.Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Check if the collided object is the player
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             if (player != null)
             {
-                player.TakeDamage(enterDamage); // Apply initial damage when entering the trigger
+                player.TakeDamage(enterDamage);
+                Debug.Log("[BasicEnemy] Gây damage vào Player!");
+            }
+        }
+        else if (collision.CompareTag("Tower"))
+        {
+            if (tower != null)
+            {
+                tower.TakeDamage(enterDamage);
+                Debug.Log("[BasicEnemy] Gây damage vào MainTower!");
             }
         }
     }
-    private void OnTriggerStay2D(UnityEngine.Collider2D collision)
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        // Check if the collided object is the player
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             if (player != null)
             {
-                player.TakeDamage(stayDamage); // Apply damage over time while staying in the trigger
+                player.TakeDamage(stayDamage * Time.deltaTime);
+                Debug.Log("[BasicEnemy] Gây damage liên tục vào Player!");
+            }
+        }
+        else if (collision.CompareTag("Tower"))
+        {
+            if (tower != null)
+            {
+                tower.TakeDamage(stayDamage * Time.deltaTime);
+                Debug.Log("[BasicEnemy] Gây damage liên tục vào MainTower!");
             }
         }
     }
+
 }

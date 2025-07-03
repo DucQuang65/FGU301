@@ -12,16 +12,17 @@ public class MainTower : MonoBehaviour
     [SerializeField] private float upgradeCostBase = 100f;
     [SerializeField] private float armorPerPoint = 0.04f;
     [SerializeField] private float maxDamageReduction = 0.8f;
-    // [SerializeField] private GameObject bulletPrefab;
-    // [SerializeField] private float attackInterval = 1f;
-   // [SerializeField] private float bulletSpeed = 5f;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float attackInterval = 0.2f;
+    [SerializeField] private float bulletSpeed = 5f;
     [SerializeField] private float maxHP;
-    [SerializeField] private AudioClip gunshotSound; // Thêm âm thanh bắn
+    [SerializeField] private AudioClip gunshotSound; 
     private const int maxLevel = 10;
-   // private float attackDamage = 1f;
-  //  private float attackTimer = 0f;
+
+    private float attackDamage = 20f;
+    private float attackTimer = 0f;
     private bool isDestroyed = false;
-    private AudioSource audioSource; // Thêm AudioSource
+    private AudioSource audioSource; 
 
     public UnityEvent onHealthChanged;
     public UnityEvent onLevelUp;
@@ -33,8 +34,8 @@ public class MainTower : MonoBehaviour
     {
         maxHP = baseMaxHP;
         currentHP = maxHP;
-        audioSource = GetComponent<AudioSource>(); // Lấy AudioSource
-    /*    if (audioSource == null)
+        audioSource = GetComponent<AudioSource>(); 
+        if (audioSource == null)
         {
             Debug.LogError("AudioSource không được gắn trên MainTower!");
         }
@@ -42,15 +43,15 @@ public class MainTower : MonoBehaviour
         {
             Debug.LogError("Gunshot sound chưa được gán!");
         }
-        Debug.Log($"MainTower: HP={currentHP}/{maxHP}, Armor={armor}, Level={level}, Damage={attackDamage}"); */
-        /* if (bulletPrefab == null)
-         {
-             Debug.LogError("Bullet Prefab chưa gán!");
-         } */
-        onHealthChanged.Invoke(); 
+        Debug.Log($"MainTower: HP={currentHP}/{maxHP}, Armor={armor}, Level={level}, Damage={attackDamage}");
+        if (bulletPrefab == null)
+        {
+            Debug.LogError("Bullet Prefab chưa gán!");
+        }
+        onHealthChanged.Invoke();
     }
 
-   /* private void Update()
+    private void Update()
     {
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackInterval)
@@ -58,24 +59,28 @@ public class MainTower : MonoBehaviour
             Attack();
             attackTimer = 0f;
         }
-    } */
+    }
 
     private void OnMouseDown()
     {
         onTowerClicked.Invoke();
     }
 
+
+   
     public void TakeDamage(float damage, float pierceFactor = 0f)
     {
         float effectiveArmor = armor * (1f - Mathf.Clamp(pierceFactor, 0f, 1f));
         float damageReduction = effectiveArmor * armorPerPoint;
         damageReduction = Mathf.Clamp(damageReduction, 0f, maxDamageReduction);
         float actualDamage = damage * (1f - damageReduction);
+        //trừ máu hiện tại theo sát thương đã tính toán
         currentHP -= actualDamage;
-        currentHP = Mathf.Max(0f, currentHP);
+        currentHP = Mathf.Max(0f, currentHP); //ko cho âm
         Debug.Log($"TakeDamage: HP before={currentHP + actualDamage}, after={currentHP}");
         onHealthChanged.Invoke();
 
+        //kiểm tra nếu HP <= 0 thì đánh dấu là đã bị phá hủy
         if (currentHP <= 0 && !isDestroyed)
         {
             isDestroyed = true;
@@ -85,7 +90,8 @@ public class MainTower : MonoBehaviour
         }
     }
 
-  /*  private void Attack()
+    //tấn công enemy gần nhất
+    private void Attack()
     {
         GameObject nearestEnemy = FindNearestEnemy();
         if (nearestEnemy != null)
@@ -105,11 +111,12 @@ public class MainTower : MonoBehaviour
             }
             if (audioSource != null && gunshotSound != null)
             {
-                audioSource.PlayOneShot(gunshotSound); // Phát âm thanh bắn
+                audioSource.PlayOneShot(gunshotSound); 
             }
         }
-    } */
+    }
 
+    //tìm enemy gần nhất 
     private GameObject FindNearestEnemy()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -129,6 +136,7 @@ public class MainTower : MonoBehaviour
         return nearest;
     }
 
+    //upgrade level bằng tiền, ko đủ thì ko cho mua (có điều kiện level 2 trở lên mới mở khóa sub tower)
     public bool Upgrade(float availableGold)
     {
         if (level >= maxLevel)
@@ -141,7 +149,7 @@ public class MainTower : MonoBehaviour
         level++;
         maxHP += hpPerLevel;
         armor += armorPerLevel;
-      //  attackDamage += 1f;
+        attackDamage += 1f;
         if (level >= 2)
         {
             int subTowerCount = level - 1;
@@ -151,7 +159,7 @@ public class MainTower : MonoBehaviour
 
         onLevelUp.Invoke();
         onHealthChanged.Invoke();
-  //      Debug.Log($"Nâng cấp! HP={currentHP}/{maxHP}, Armor={armor}, Level={level}, Damage={attackDamage}");
+        Debug.Log($"Nâng cấp! HP={currentHP}/{maxHP}, Armor={armor}, Level={level}, Damage={attackDamage}");
         return true;
     }
 
